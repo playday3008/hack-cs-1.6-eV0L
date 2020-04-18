@@ -12,14 +12,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Injector.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Loader.bmp" />
+    <ResourceCompile Include="loader.rc" />
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="Loader.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Loader.rc" />
+    <Image Include="Loader.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <SccProjectName />
