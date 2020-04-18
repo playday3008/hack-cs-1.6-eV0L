@@ -34,6 +34,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -63,9 +64,12 @@
       <PrecompiledHeaderOutputFile>.\release\Injector.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\release\</ObjectFileName>
       <ProgramDataBaseFileName>.\release\</ProgramDataBaseFileName>
-      <SupportJustMyCode>true</SupportJustMyCode>
+      <SupportJustMyCode>false</SupportJustMyCode>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>false</SuppressStartupBanner>
