@@ -1,19 +1,18 @@
-///////////////////////////////////////////////////////////////////////////////
+//{{NO_DEPENDENCIES}}
+// Включаемый файл, созданный в Microsoft Visual C++.
+// Используется loader.rc
 //
-// ж–‡д»¶жЏЏиї°
-//     Resource.h
-//
-// з‰€жќѓеЈ°жЋ
-//     Copyright (c) 2007 е€жіЅе›ґ All Rights Reserved.
-//
-// ж›ґж–°и®°еЅ•
-//
-//     2007е№ґ09жњ€11ж—Ґ : е€›е»є
-//
-///////////////////////////////////////////////////////////////////////////////
-#define IDD_LOADER 101
-#define IDB_LOADER 102
-#define IDI_LOADER 103
-#define IDC_LOADER 104
-#define IDC_BUTTON_URL 105
-#define IDC_STATIC (-1)
+#define IDB_LOADER                     101
+#define IDI_LOADER                     102
+#define IDD_LOADER                     105
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        107
+#define _APS_NEXT_COMMAND_VALUE         40001
+#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_SYMED_VALUE           101
+#endif
+#endif

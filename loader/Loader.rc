@@ -1,41 +1,58 @@
-///////////////////////////////////////////////////////////////////////////////
+// Microsoft Visual C++ generated resource script.
 //
-// ж–‡д»¶жЏЏиї°
-//     Loader.rc
-//
-// з‰€жќѓеЈ°жЋ
-//     Copyright (c) 2009 е€жіЅе›ґ All Rights Reserved.
-//
-// ж›ґж–°и®°еЅ•
-//
-//     2009е№ґ02жњ€08ж—Ґ : е€›е»є
-//
-///////////////////////////////////////////////////////////////////////////////
-#include <winuser.h>
 #include "resource.h"
 
-IDI_LOADER              ICON    DISCARDABLE     "Loader.ico"
-IDB_LOADER              BITMAP  DISCARDABLE     "Loader.bmp"
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
 
-IDD_LOADER DIALOG DISCARDABLE  105, 80, 259, 218
-STYLE WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
-CAPTION "Hack by eVOL"
-FONT 10, "е®‹дЅ“"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Украинский (Украина) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_UKR)
+LANGUAGE LANG_UKRAINIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
 BEGIN
-    CONTROL         "-=[eVOL]=- > All Rights Served.",
-                    IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,8,203,
-                    191,8
-    LTEXT           "Credit: Liu Zewei.",
-                    IDC_STATIC,8,190,186,9
-    CONTROL         102,IDC_STATIC,"Static",SS_BITMAP,7,7,246,177
-    PUSHBUTTON      "Visit site",IDC_BUTTON_URL,202,186,50,25,BS_MULTILINE | 
-                    NOT WS_TABSTOP
+    "resource.h\0"
 END
 
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
 
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION 0,0,0,1
- PRODUCTVERSION 0,0,0,1
+ PRODUCTVERSION 0,1,0,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x21L
@@ -43,28 +60,101 @@ VS_VERSION_INFO VERSIONINFO
  FILEFLAGS 0x20L
 #endif
  FILEOS 0x40004L
- FILETYPE 0x1L
+ FILETYPE 0x0L
  FILESUBTYPE 0x0L
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "080404b0"
+        BLOCK "000904b0"
         BEGIN
-            VALUE "Comments", "\0"
-            VALUE "CompanyName", "\0"
-            VALUE "FileDescription", "Hack by eVOL\0"
-            VALUE "FileVersion", "0, 0, 0, 1\0"
-            VALUE "InternalName", "Hack by eVOL\0"
-            VALUE "LegalCopyright", "-=[eVOL]=- > All Rights Served.\0"
-            VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "Loader.exe\0"
-            VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "Hack by eVOL\0"
-            VALUE "ProductVersion", "0, 1, 0, 1\0"
+            VALUE "FileDescription", "Hack by eVOL"
+            VALUE "FileVersion", "0.0.0.1"
+            VALUE "InternalName", "Hack by eVOL"
+            VALUE "LegalCopyright", "-=[eVOL]=- > All Rights Served."
+            VALUE "OriginalFilename", "Loader.exe"
+            VALUE "ProductName", "Hack by eVOL"
+            VALUE "ProductVersion", "0.1.0.1"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x804, 1200
+        VALUE "Translation", 0x9, 1200
     END
 END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LOADER              BITMAP                  "Loader.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_LOADER              ICON                    "Loader.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_LOADER, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LOADER DIALOGEX 0, 0, 259, 193
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Hack by eVOL"
+FONT 10, "Times New Roman", 400, 0, 0x1
+BEGIN
+    CONTROL         "-=[eVOL]=- > All Rights Served.",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,7,178,163,8
+    LTEXT           "Credit: Liu Zewei, Fluttershy",IDC_STATIC,7,164,164,9
+    CONTROL         IDB_LOADER,IDC_STATIC,"Static",SS_BITMAP,7,7,245,153
+    PUSHBUTTON      "Visit Discord",IDOK,188,161,64,25
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_LOADER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // Украинский (Украина) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
