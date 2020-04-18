@@ -1,29 +1,29 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// 文件描述
+// File Description
 //     Injector.cpp
 //
-// 版权声明
-//     Copyright (c) 2009 刘泽围 All Rights Reserved.
+// Copyright Notice
+//     Copyright (c) 2009 Liu Zewei All Rights Reserved.
 //
-// 更新记录
+// Change log
 //
-//     2009年02月08日 : 创建
+//     08.02.2009 : Create
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "Injector.h"
 
-// 操作系统版本
+// Operating system version
 Injector::OS_VER OsVer;
 bool IsGotOsVer = false;
 
-// 注入相关系统 API
+// Inject related system API
 Injector::OS_API OsApi = { NULL };
 bool IsGotOsApi = false;
 
-// 注入代码
+// Inject code
 DWORD LoadLibraryAddress = NULL;
-#pragma pack( 1 ) // 使注入代码字节有序
+#pragma pack( 1 ) // Order the injected code bytes
 struct INJECT_CODE
 {
     BYTE  PushOpc;
@@ -36,20 +36,20 @@ struct INJECT_CODE
 };
 #pragma pack()
 
-// Windows9x 系统上模拟 OpenThread
+// OpenThread emulation on Windows 9x
 HANDLE WINAPI OpenThread9x( DWORD dwDesiredAccess, BOOL bInheritHandle, DWORD dwThreadId );
 
-// Windows9x 系统上模拟 VirtualAllocEx
+// VirtualAllocEx simulation on Windows9x system
 LPVOID WINAPI VirtualAllocEx9x( HANDLE hProcess, LPVOID lpAddress, DWORD dwSize, DWORD flAllocationType, DWORD flProtect );
 
-// Windows9x 系统上模拟 VirtualFreeEx
+// Simulate VirtualFreeEx on Windows9x system
 BOOL WINAPI VirtualFreeEx9x( HANDLE hProcess, LPVOID lpAddress, DWORD dwSize, DWORD dwFreeType );
 
-// 通过特征串从内存中搜索到其起始地址
+// Search the starting address from the memory through the signature string
 DWORD SearchMemory( DWORD start, DWORD length, BYTE *pattern, CHAR *mask );
 
-// 通过比较判断两个模块的名字判断两个模块是否为同一个模块
-// 注意 : 此比较为完全忽略路径与大小写的比较
+// Determine whether the two modules are the same module by comparing the names of the two modules
+// Note: This comparison is a complete ignore path and case comparison
 bool IsSameName( const char *targetString, const char *sourceString );
 
 bool Injector::GetOsVer( OS_VER *osVer )
@@ -69,14 +69,14 @@ bool Injector::GetOsVer( OS_VER *osVer )
 bool Injector::GetOsApi( OS_API *osApi )
 {
     //
-    // 得到操作系统版本
+    // Get the operating system version
     //
     OS_VER osVer;
     if ( GetOsVer( &osVer ) == false )
         return false;
     
     //
-    // 根据操作系统版本动态得到跟注入相关的操作系统 API
+    // Obtain the operating system API related to injection dynamically according to the operating system version
     //
     HINSTANCE kernel32 = GetModuleHandle( "kernel32.dll" );
     if ( kernel32 == NULL )
@@ -126,13 +126,13 @@ bool Injector::GetOsApi( OS_API *osApi )
 
 bool Injector::GetProcessInfo( const char *exeName, PROCESS_INFORMATION *processInfo )
 {
-    // 得到相关系统 API
+    // Get related system API
     if ( IsGotOsApi == false )
         if ( ( IsGotOsApi = GetOsApi( &OsApi ) ) == false )
             return false;
 
     //
-    // 枚举所有进程找出目标进程
+    // Enumerate all processes to find the target process
     //
     HANDLE snapshotProcess = OsApi.CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
     if ( snapshotProcess == INVALID_HANDLE_VALUE )
@@ -162,7 +162,7 @@ bool Injector::GetProcessInfo( const char *exeName, PROCESS_INFORMATION *process
         return false;
 
     //
-    // 枚举所有线程找出目标进程中的任一线程
+    // Enumerate all threads to find any thread in the target process
     //
     HANDLE snapshotThread = OsApi.CreateToolhelp32Snapshot( TH32CS_SNAPTHREAD, 0 );
     if ( snapshotThread == INVALID_HANDLE_VALUE )
@@ -192,7 +192,7 @@ bool Injector::GetProcessInfo( const char *exeName, PROCESS_INFORMATION *process
         return false;
 
     //
-    // 分别通过 Id 找到其句柄, 填充 processInfo, 输出结果
+    // Find their handles by Id, fill in processInfo, and output the result
     //
     processInfo->dwProcessId = PE32.th32ProcessID;
     processInfo->hProcess = OsApi.OpenProcess( PROCESS_ALL_ACCESS, FALSE, PE32.th32ProcessID );
@@ -215,12 +215,12 @@ bool Injector::GetModuleInfo( const char *exeName, const char *moduleName, MODUL
 {
     PROCESS_INFORMATION processInfo;
 
-    // 得到相关系统 API
+    // Get related system API
     if ( IsGotOsApi == false )
         if ( ( IsGotOsApi = GetOsApi( &OsApi ) ) == false )
             return false;
 
-    // 获取操作目标进程的相关数据
+    // Obtain the relevant data of the operation target process
     if ( GetProcessInfo( exeName, &processInfo ) == false )
         return false;
 
@@ -266,26 +266,26 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
     DWORD beginPosition, endPosition;
     INJECT_CODE injectCode;
     
-    // 得到系统版本
+    // Get the system version
     if ( IsGotOsVer == false )
         if ( ( IsGotOsVer = GetOsVer( &OsVer ) ) == false )
             return false;
 
-    // 得到相关系统 API
+    // Get related system API
     if ( IsGotOsApi == false )
         if ( ( IsGotOsApi = GetOsApi( &OsApi ) ) == false )
             return false;    
 
-    // 检查待注入模块是否已经被加载
+    // Check if the module to be injected has been loaded
     if ( GetModuleInfo( exeName, modulePath, NULL ) == true )
         return true;
 
-    // 获取操作目标进程的相关数据
+    // Obtain the relevant data of the operation target process
     if ( GetProcessInfo( exeName, &processInfo ) == false )
         return false;   
 
     //
-    // 注入目标进程
+    // Inject target process
     //
     if ( LoadLibraryAddress == NULL )
     {
@@ -317,24 +317,24 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
 
     endPosition = beginPosition + offsetof( INJECT_CODE, DoneOpc );
 
-    // 根据操作系统版本填充相应注入代码结构体
-    injectCode.PushOpc = 0x68;   // 0x68 是 push 的机器码
+    // Fill the corresponding injected code structure according to the operating system version
+    injectCode.PushOpc = 0x68;   // 0x68 is the machine code of push
     injectCode.PushAdr = beginPosition + offsetof( INJECT_CODE, ModulePath );
-    injectCode.CallOpc = 0xE8;   // 0xE8 是相对地址 call 的机器码
+    injectCode.CallOpc = 0xE8;   // 0xE8 is the machine code of the relative address call
     injectCode.CallAdr = LoadLibraryAddress - endPosition;
     if ( OsVer.IsWin98 || OsVer.IsWinMe )
     {        
         injectCode.DoneOpc = 0xEB;
-        injectCode.DoneAdr = 0xFE; // 0xFEEB 是跳转到当前行, 也就是原地循环
+        injectCode.DoneAdr = 0xFE; // 0xFEEB is to jump to the current line, that is, loop in place
     }
     else
     {
-        injectCode.DoneOpc = 0xC2;   // 0xC2 是返回
-        injectCode.DoneAdr = 0x0004; // 返回值
+        injectCode.DoneOpc = 0xC2;   // 0xC2 is returned
+        injectCode.DoneAdr = 0x0004; // return value
     }
     strcpy_s( injectCode.ModulePath, MAX_PATH, modulePath );
 
-    // 向目标进程写入注入代码
+    // Write injection code to the target process
     if ( !WriteProcessMemory( processInfo.hProcess, (VOID*)beginPosition, &injectCode, sizeof(INJECT_CODE), NULL ) )
     {
         OsApi.VirtualFreeEx( processInfo.hProcess, (VOID*)beginPosition, sizeof(INJECT_CODE), MEM_DECOMMIT );
@@ -344,12 +344,12 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
         return false;
     }
 
-    // 根据操作系统版本用相应的方式运行已写入的注入代码
+    // Run the injected code written in a corresponding way according to the operating system version
     if ( OsVer.IsWin98 || OsVer.IsWinMe )
     {
-        // 检查目标进程是否已经启动并初始化好, 这里以目标进程加载了 Kernel32.dll 为
-        // 其启动成功的标志, 且判断后再 Sleep() 给其启动时间, 或许还有其他更好更稳
-        // 健的方法
+        /*Check whether the target process has been started and initialized.Here, the target process has loaded Kernel32.dll as 
+        the sign of its successful startup, and after judgment, Sleep () gives it the startup time.There may be other 
+        better and more robust methods.*/
         if ( GetModuleInfo( exeName, "kernel32.dll", NULL ) == false )
         {
             OsApi.VirtualFreeEx( processInfo.hProcess, (VOID*)beginPosition, sizeof(INJECT_CODE), MEM_DECOMMIT );
@@ -360,11 +360,14 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
         }
         Sleep( 50 );                       
         
-        //
-        // 通过修改目标进程中某一线程的线程环境的方法, 使目标进程执行我们写入的代码
-        // 注意: 以下任一句 ResumeThread() 函数调用失败, 目标线程都将被永久挂起, 必
-        //       造成目标进程不可预计的严重错误, 建议的做法是重新启动目标进程.
-        //
+        /*
+        
+        By modifying the thread environment of a thread in the target process, 
+        the target process executes the code we wrote.
+        Note: If any of the following ResumeThread () function calls fail, the target thread will be permanently suspended,
+        which will cause the target process to be unpredictable. For serious errors, the recommended approach is to restart the target process.
+
+        */
         INT countSuspend;
         CONTEXT orgContext, runContext;
 
@@ -398,7 +401,7 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
         
         while ( runContext.Eip != endPosition )
         {
-            // 确保并调整该线程到运行状态
+            // Ensure and adjust the thread to the running state
             while ( true )
             {
                 DWORD returnValue = ResumeThread( processInfo.hThread );
@@ -424,10 +427,10 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
                 }
             }
             
-            // 让线程运行我们注入的代码
+            // Let the thread run the code we injected
             Sleep( 50 );
 
-            // 确保并调整该线程到暂停状态
+            // Ensure and adjust the thread to the suspended state
             if ( SuspendThread( processInfo.hThread ) == 0xFFFFFFFF )
             {
                 OsApi.VirtualFreeEx( processInfo.hProcess, (VOID*)beginPosition, sizeof(INJECT_CODE), MEM_DECOMMIT );
@@ -468,14 +471,14 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
         }
 
         //
-        // 操作成功, 恢复线程到初始状态
+        // Successful operation, restore thread to initial state
         //
         if ( countSuspend > 0 )
             while ( countSuspend-- > 0 && ResumeThread( processInfo.hThread ) != 0xFFFFFFFF );
         else if ( countSuspend < 0 )
             while ( countSuspend++ < 0 && SuspendThread( processInfo.hThread ) != 0xFFFFFFFF );
     }
-    else // Windows NT, Windows2000, WindowsXP 采用创建远程线程的方法运行注入代码
+    else // Windows NT, Windows2000, WindowsXP use the method of creating remote threads to run the injected code
     {
         HANDLE remoteThread = CreateRemoteThread( processInfo.hProcess, NULL, 0,
             (LPTHREAD_START_ROUTINE)beginPosition, NULL, 0, NULL );
@@ -511,14 +514,14 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
 HANDLE WINAPI OpenThread9x( DWORD dwDesiredAccess, BOOL bInheritHandle, DWORD dwThreadId )
 {
     //
-    // 说明 : 
+    // Description : 
     //
-    // 1> 系统 API OpenProcess() 做了什么?
-    //    1、检查目标是否真的是一个进程
-    //    2、调用微软未公开的一个系统函数 GetHandle()
+    // 1> What does the system API OpenProcess () do?
+    //    1、Check if the target is really a process
+    //    2、Call Microsoft's undisclosed system function GetHandle ()
     //
-    // 2> 我们的 OpenThread9x() 做了什么?
-    //    直接得到线程的 TDB, 然后调用 OpenProcess() 调用的 GetHandle() 得到线程句柄
+    // 2> What did our OpenThread9x () do?
+    //    Get the TDB of the thread directly, and then call GetHandle () called by OpenProcess () to get the thread handle
     //
     DWORD  processID, obsfucator, *pThreadDataBase;
     HANDLE hThread;

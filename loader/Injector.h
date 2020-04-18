@@ -1,16 +1,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// 文件描述
+// File Description
 //     Injector.h
-//     关于注入远程进程相关的一个库, 命名空间为 Injector
-//     支持 Windows9x, WindowsME, WindowsNT, Windows2000, WindowsXP
+//     Regarding the injection of a library related to the remote process, the namespace is Injector
+//     Support Windows9x, WindowsME, WindowsNT, Windows2000, WindowsXP
 //
-// 版权声明
-//     Copyright (c) 2009 刘泽围 All Rights Reserved.
+// Copyright Notice
+//     Copyright (c) 2009 Liu Zewei All Rights Reserved.
 //
-// 更新记录
+// Change log
 //
-//     2009年02月08日 : 创建
+//     08.02.2009 : Create
 //
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef INJECTOR_H
@@ -24,7 +24,7 @@
 namespace Injector
 {
     //
-    // 操作系统版本, 封装成结构体
+    // Operating system version, packaged as a structure
     //
     struct OS_VER
     {
@@ -35,7 +35,7 @@ namespace Injector
 
 
     //
-    // 跟注入相关的一组操作系统 API, 封装成结构体
+    // A set of operating system APIs related to injection, encapsulated into a structure
     //
     struct OS_API
     {
@@ -68,90 +68,90 @@ namespace Injector
     };
 
     // 
-    // 功能
-    //     得到操作系统版本
+    // Features
+    //     Get the operating system version
     //  
-    // 参数
+    // parameter
     //
     // osVer
-    //     输出操作系统版本结构体变量的指针
+    //     Pointer to output operating system version structure variable
     //
-    // 返回值
-    //     false : 失败
-    //     true  : 成功
+    // return value
+    //     false : failure
+    //     true  : success
     //
     bool GetOsVer( OS_VER *osVer );
 
     // 
-    // 功能
-    //     根据操作系统版本, 动态得到跟注入进程相关的一组接口统一的系统 API
-    //     如果该操作系统不提供其中某个函数, 则会由库负责模拟一个
+    // Features
+    //     According to the operating system version, dynamically obtain a set of unified system APIs related to the injection process
+    //     If the operating system does not provide one of these functions, the library is responsible for simulating one
     //  
-    // 参数
+    // parameter
     //
     // osApi
-    //     输出系统 API 结构体变量的指针
+    //     Pointer to output system API structure variable
     //
-    // 返回值
-    //     false : 失败
-    //     true  : 成功
+    // return value
+    //     false : failed
+    //     true  : success
     //
     bool GetOsApi( OS_API *osApi );
 
     // 
-    // 功能
-    //     获取操作目标进程的相关数据
+    // Features
+    //     Obtain the relevant data of the operation target process
     //  
-    // 参数
+    // parameter
     //
     // exeName
-    //     目标进程的可执行文件名(不区分路径)
+    //     The executable file name of the target process (path indistinguishable)
     // 
     // processInfo
-    //     输出该进程 PROCESS_INFORMATION 结构体变量的指针
+    //     Output a pointer to the process PROCESS_INFORMATION structure variable
     //
-    // 返回值
-    //     false : 失败
-    //     true  : 成功
+    // return value
+    //     false : failed
+    //     true  : success
     //
     bool GetProcessInfo( const char *exeName, PROCESS_INFORMATION *processInfo );
 
     // 
-    // 功能
-    //     获取目标进程中一个模块的相关数据
+    // Features
+    //     Get data about a module in the target process
     //  
-    // 参数
+    // parameter
     //
     // exeName
-    //     目标进程的可执行文件名(不区分路径)
+    //     The executable file name of the target process (path indistinguishable)
     //
     // moduleName
-    //     目标进程中一个模块的文件名(不区分路径)
+    //     File name of a module in the target process (path indistinguishable)
     //
     // moduleEntry32
-    //     输出该模块 MODULEENTRY32 结构体变量的指针
+    //     Output the pointer of the module variable of this module MODULEENTRY32
     //
-    // 返回值
-    //     false : 失败
-    //     true  : 成功
+    // return value
+    //     false : failed
+    //     true  : success
     //
     bool GetModuleInfo( const char *exeName, const char *moduleName, MODULEENTRY32 *moduleEntry32 );
 
     // 
-    // 功能
-    //     将模块注入到目标进程
+    // Features
+    //     Inject the module into the target process
     // 
-    // 参数
+    // parameter
     //
     // exeName
-    //     目标进程的可执行文件名(不区分路径)
+    //     The executable file name of the target process (path indistinguishable)
     // 
     // modulePath
-    //     待注入到目标进程的模块的绝对路径或相对于目标进程的相对路径
+    //     The absolute path of the module to be injected into the target process or the relative path relative to the target process
     //
-    // 返回值
-    //     false : 失败
-    //     true  : 成功
+    // return value
+    //     false : failed
+    //     true  : success
     //
     bool InjectModule( const char *exeName, const char *modulePath );
 }

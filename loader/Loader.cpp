@@ -1,17 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// 文件描述
+// File Description
 //     Loader.cpp
 //
-// 版权声明
-//     Copyright (c) 2009 刘泽围 All Rights Reserved.
+// Copyright Notice
+//     Copyright (c) 2009 Liu Zewei All Rights Reserved.
 //
-// 更新记录
+// Change log
 //
-//     2009年02月08日 : 创建
+//     08.02.2009 : Сreate
 //
 ///////////////////////////////////////////////////////////////////////////////
-#include "Resource.h"
+#include "resource.h"
 #include "Injector.h"
 #pragma comment( lib, "user32.lib" )
 #pragma comment( lib, "shell32.lib" )
@@ -39,10 +39,10 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
         return 0;
     }
     
-    // 创建注入线程  
+    // Create injection thread  
     CreateThread( NULL, 0, InjectThread, NULL, 0, new DWORD );
     
-    // 创建主对话框
+    // Create main dialog
     appInst = hInstance;    
     DialogBox( appInst, MAKEINTRESOURCE(IDD_LOADER), NULL, (DLGPROC)LoaderProcedure );
     
@@ -51,14 +51,14 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 DWORD WINAPI InjectThread( LPVOID param )
 {
-    // 得到当前路径
+    // Get current path
     char modulePath[MAX_PATH];
     GetModuleFileName( NULL, modulePath, MAX_PATH );
     char* index = strrchr( modulePath, '\\' );
     modulePath[ index - modulePath + 1 ] = 0;
     strcat_s( modulePath, MAX_PATH, moduleName );
     
-    // 检查待注入的模块是否存在
+    // Check if the module to be injected exists
     WIN32_FIND_DATA WFD;
     if ( FindFirstFile( modulePath, &WFD ) == INVALID_HANDLE_VALUE )
     {
@@ -72,7 +72,7 @@ DWORD WINAPI InjectThread( LPVOID param )
         PostMessage( loaderHwnd, WM_CLOSE, NULL, NULL );
     }
     
-    // 监视目标进程, 注入模块
+    // Monitor target process, Injection module
     while ( true )
     {
         static int interval = 0;
@@ -140,8 +140,8 @@ LRESULT CALLBACK LoaderProcedure( HWND dlg, UINT msg, WPARAM wParam, LPARAM lPar
         
     case WM_COMMAND:
         
-        if ( LOWORD(wParam) == IDC_BUTTON_URL )
-            ShellExecute( NULL, "open", "explorer", "https://www.facebook.com/groups/1628540544084700/", NULL, SW_SHOWMAXIMIZED );
+        if ( LOWORD(wParam) == IDOK)
+            ShellExecute( NULL, "open", "explorer", "https://discord.gg/gKEk9GV", NULL, SW_SHOWMAXIMIZED );
         
         break;
 
