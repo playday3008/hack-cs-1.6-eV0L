@@ -1,14 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// ÎÄ¼şÃèÊö
+// æ–‡ä»¶æè¿°
 //     Loader.cpp
 //
-// °æÈ¨ÉùÃ÷
-//     Copyright (c) 2009 ÁõÔóÎ§ All Rights Reserved.
+// ç‰ˆæƒå£°æ˜
+//     Copyright (c) 2009 åˆ˜æ³½å›´ All Rights Reserved.
 //
-// ¸üĞÂ¼ÇÂ¼
+// æ›´æ–°è®°å½•
 //
-//     2009Äê02ÔÂ08ÈÕ : ´´½¨
+//     2009å¹´02æœˆ08æ—¥ : åˆ›å»º
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "Resource.h"
@@ -39,10 +39,10 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
         return 0;
     }
     
-    // ´´½¨×¢ÈëÏß³Ì  
+    // åˆ›å»ºæ³¨å…¥çº¿ç¨‹  
     CreateThread( NULL, 0, InjectThread, NULL, 0, new DWORD );
     
-    // ´´½¨Ö÷¶Ô»°¿ò
+    // åˆ›å»ºä¸»å¯¹è¯æ¡†
     appInst = hInstance;    
     DialogBox( appInst, MAKEINTRESOURCE(IDD_LOADER), NULL, (DLGPROC)LoaderProcedure );
     
@@ -51,14 +51,14 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 DWORD WINAPI InjectThread( LPVOID param )
 {
-    // µÃµ½µ±Ç°Â·¾¶
+    // å¾—åˆ°å½“å‰è·¯å¾„
     char modulePath[MAX_PATH];
     GetModuleFileName( NULL, modulePath, MAX_PATH );
     char* index = strrchr( modulePath, '\\' );
     modulePath[ index - modulePath + 1 ] = 0;
     strcat_s( modulePath, MAX_PATH, moduleName );
     
-    // ¼ì²é´ı×¢ÈëµÄÄ£¿éÊÇ·ñ´æÔÚ
+    // æ£€æŸ¥å¾…æ³¨å…¥çš„æ¨¡å—æ˜¯å¦å­˜åœ¨
     WIN32_FIND_DATA WFD;
     if ( FindFirstFile( modulePath, &WFD ) == INVALID_HANDLE_VALUE )
     {
@@ -72,7 +72,7 @@ DWORD WINAPI InjectThread( LPVOID param )
         PostMessage( loaderHwnd, WM_CLOSE, NULL, NULL );
     }
     
-    // ¼àÊÓÄ¿±ê½ø³Ì, ×¢ÈëÄ£¿é
+    // ç›‘è§†ç›®æ ‡è¿›ç¨‹, æ³¨å…¥æ¨¡å—
     while ( true )
     {
         static int interval = 0;

@@ -1,29 +1,29 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// ÎÄ¼şÃèÊö
+// æ–‡ä»¶æè¿°
 //     Injector.cpp
 //
-// °æÈ¨ÉùÃ÷
-//     Copyright (c) 2009 ÁõÔóÎ§ All Rights Reserved.
+// ç‰ˆæƒå£°æ˜
+//     Copyright (c) 2009 åˆ˜æ³½å›´ All Rights Reserved.
 //
-// ¸üĞÂ¼ÇÂ¼
+// æ›´æ–°è®°å½•
 //
-//     2009Äê02ÔÂ08ÈÕ : ´´½¨
+//     2009å¹´02æœˆ08æ—¥ : åˆ›å»º
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include "Injector.h"
 
-// ²Ù×÷ÏµÍ³°æ±¾
+// æ“ä½œç³»ç»Ÿç‰ˆæœ¬
 Injector::OS_VER OsVer;
 bool IsGotOsVer = false;
 
-// ×¢ÈëÏà¹ØÏµÍ³ API
+// æ³¨å…¥ç›¸å…³ç³»ç»Ÿ API
 Injector::OS_API OsApi = { NULL };
 bool IsGotOsApi = false;
 
-// ×¢Èë´úÂë
+// æ³¨å…¥ä»£ç 
 DWORD LoadLibraryAddress = NULL;
-#pragma pack( 1 ) // Ê¹×¢Èë´úÂë×Ö½ÚÓĞĞò
+#pragma pack( 1 ) // ä½¿æ³¨å…¥ä»£ç å­—èŠ‚æœ‰åº
 struct INJECT_CODE
 {
     BYTE  PushOpc;
@@ -36,20 +36,20 @@ struct INJECT_CODE
 };
 #pragma pack()
 
-// Windows9x ÏµÍ³ÉÏÄ£Äâ OpenThread
+// Windows9x ç³»ç»Ÿä¸Šæ¨¡æ‹Ÿ OpenThread
 HANDLE WINAPI OpenThread9x( DWORD dwDesiredAccess, BOOL bInheritHandle, DWORD dwThreadId );
 
-// Windows9x ÏµÍ³ÉÏÄ£Äâ VirtualAllocEx
+// Windows9x ç³»ç»Ÿä¸Šæ¨¡æ‹Ÿ VirtualAllocEx
 LPVOID WINAPI VirtualAllocEx9x( HANDLE hProcess, LPVOID lpAddress, DWORD dwSize, DWORD flAllocationType, DWORD flProtect );
 
-// Windows9x ÏµÍ³ÉÏÄ£Äâ VirtualFreeEx
+// Windows9x ç³»ç»Ÿä¸Šæ¨¡æ‹Ÿ VirtualFreeEx
 BOOL WINAPI VirtualFreeEx9x( HANDLE hProcess, LPVOID lpAddress, DWORD dwSize, DWORD dwFreeType );
 
-// Í¨¹ıÌØÕ÷´®´ÓÄÚ´æÖĞËÑË÷µ½ÆäÆğÊ¼µØÖ·
+// é€šè¿‡ç‰¹å¾ä¸²ä»å†…å­˜ä¸­æœç´¢åˆ°å…¶èµ·å§‹åœ°å€
 DWORD SearchMemory( DWORD start, DWORD length, BYTE *pattern, CHAR *mask );
 
-// Í¨¹ı±È½ÏÅĞ¶ÏÁ½¸öÄ£¿éµÄÃû×ÖÅĞ¶ÏÁ½¸öÄ£¿éÊÇ·ñÎªÍ¬Ò»¸öÄ£¿é
-// ×¢Òâ : ´Ë±È½ÏÎªÍêÈ«ºöÂÔÂ·¾¶Óë´óĞ¡Ğ´µÄ±È½Ï
+// é€šè¿‡æ¯”è¾ƒåˆ¤æ–­ä¸¤ä¸ªæ¨¡å—çš„åå­—åˆ¤æ–­ä¸¤ä¸ªæ¨¡å—æ˜¯å¦ä¸ºåŒä¸€ä¸ªæ¨¡å—
+// æ³¨æ„ : æ­¤æ¯”è¾ƒä¸ºå®Œå…¨å¿½ç•¥è·¯å¾„ä¸å¤§å°å†™çš„æ¯”è¾ƒ
 bool IsSameName( const char *targetString, const char *sourceString );
 
 bool Injector::GetOsVer( OS_VER *osVer )
@@ -69,14 +69,14 @@ bool Injector::GetOsVer( OS_VER *osVer )
 bool Injector::GetOsApi( OS_API *osApi )
 {
     //
-    // µÃµ½²Ù×÷ÏµÍ³°æ±¾
+    // å¾—åˆ°æ“ä½œç³»ç»Ÿç‰ˆæœ¬
     //
     OS_VER osVer;
     if ( GetOsVer( &osVer ) == false )
         return false;
     
     //
-    // ¸ù¾İ²Ù×÷ÏµÍ³°æ±¾¶¯Ì¬µÃµ½¸ú×¢ÈëÏà¹ØµÄ²Ù×÷ÏµÍ³ API
+    // æ ¹æ®æ“ä½œç³»ç»Ÿç‰ˆæœ¬åŠ¨æ€å¾—åˆ°è·Ÿæ³¨å…¥ç›¸å…³çš„æ“ä½œç³»ç»Ÿ API
     //
     HINSTANCE kernel32 = GetModuleHandle( "kernel32.dll" );
     if ( kernel32 == NULL )
@@ -126,13 +126,13 @@ bool Injector::GetOsApi( OS_API *osApi )
 
 bool Injector::GetProcessInfo( const char *exeName, PROCESS_INFORMATION *processInfo )
 {
-    // µÃµ½Ïà¹ØÏµÍ³ API
+    // å¾—åˆ°ç›¸å…³ç³»ç»Ÿ API
     if ( IsGotOsApi == false )
         if ( ( IsGotOsApi = GetOsApi( &OsApi ) ) == false )
             return false;
 
     //
-    // Ã¶¾ÙËùÓĞ½ø³ÌÕÒ³öÄ¿±ê½ø³Ì
+    // æšä¸¾æ‰€æœ‰è¿›ç¨‹æ‰¾å‡ºç›®æ ‡è¿›ç¨‹
     //
     HANDLE snapshotProcess = OsApi.CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
     if ( snapshotProcess == INVALID_HANDLE_VALUE )
@@ -162,7 +162,7 @@ bool Injector::GetProcessInfo( const char *exeName, PROCESS_INFORMATION *process
         return false;
 
     //
-    // Ã¶¾ÙËùÓĞÏß³ÌÕÒ³öÄ¿±ê½ø³ÌÖĞµÄÈÎÒ»Ïß³Ì
+    // æšä¸¾æ‰€æœ‰çº¿ç¨‹æ‰¾å‡ºç›®æ ‡è¿›ç¨‹ä¸­çš„ä»»ä¸€çº¿ç¨‹
     //
     HANDLE snapshotThread = OsApi.CreateToolhelp32Snapshot( TH32CS_SNAPTHREAD, 0 );
     if ( snapshotThread == INVALID_HANDLE_VALUE )
@@ -192,7 +192,7 @@ bool Injector::GetProcessInfo( const char *exeName, PROCESS_INFORMATION *process
         return false;
 
     //
-    // ·Ö±ğÍ¨¹ı Id ÕÒµ½Æä¾ä±ú, Ìî³ä processInfo, Êä³ö½á¹û
+    // åˆ†åˆ«é€šè¿‡ Id æ‰¾åˆ°å…¶å¥æŸ„, å¡«å…… processInfo, è¾“å‡ºç»“æœ
     //
     processInfo->dwProcessId = PE32.th32ProcessID;
     processInfo->hProcess = OsApi.OpenProcess( PROCESS_ALL_ACCESS, FALSE, PE32.th32ProcessID );
@@ -215,12 +215,12 @@ bool Injector::GetModuleInfo( const char *exeName, const char *moduleName, MODUL
 {
     PROCESS_INFORMATION processInfo;
 
-    // µÃµ½Ïà¹ØÏµÍ³ API
+    // å¾—åˆ°ç›¸å…³ç³»ç»Ÿ API
     if ( IsGotOsApi == false )
         if ( ( IsGotOsApi = GetOsApi( &OsApi ) ) == false )
             return false;
 
-    // »ñÈ¡²Ù×÷Ä¿±ê½ø³ÌµÄÏà¹ØÊı¾İ
+    // è·å–æ“ä½œç›®æ ‡è¿›ç¨‹çš„ç›¸å…³æ•°æ®
     if ( GetProcessInfo( exeName, &processInfo ) == false )
         return false;
 
@@ -266,26 +266,26 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
     DWORD beginPosition, endPosition;
     INJECT_CODE injectCode;
     
-    // µÃµ½ÏµÍ³°æ±¾
+    // å¾—åˆ°ç³»ç»Ÿç‰ˆæœ¬
     if ( IsGotOsVer == false )
         if ( ( IsGotOsVer = GetOsVer( &OsVer ) ) == false )
             return false;
 
-    // µÃµ½Ïà¹ØÏµÍ³ API
+    // å¾—åˆ°ç›¸å…³ç³»ç»Ÿ API
     if ( IsGotOsApi == false )
         if ( ( IsGotOsApi = GetOsApi( &OsApi ) ) == false )
             return false;    
 
-    // ¼ì²é´ı×¢ÈëÄ£¿éÊÇ·ñÒÑ¾­±»¼ÓÔØ
+    // æ£€æŸ¥å¾…æ³¨å…¥æ¨¡å—æ˜¯å¦å·²ç»è¢«åŠ è½½
     if ( GetModuleInfo( exeName, modulePath, NULL ) == true )
         return true;
 
-    // »ñÈ¡²Ù×÷Ä¿±ê½ø³ÌµÄÏà¹ØÊı¾İ
+    // è·å–æ“ä½œç›®æ ‡è¿›ç¨‹çš„ç›¸å…³æ•°æ®
     if ( GetProcessInfo( exeName, &processInfo ) == false )
         return false;   
 
     //
-    // ×¢ÈëÄ¿±ê½ø³Ì
+    // æ³¨å…¥ç›®æ ‡è¿›ç¨‹
     //
     if ( LoadLibraryAddress == NULL )
     {
@@ -317,24 +317,24 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
 
     endPosition = beginPosition + offsetof( INJECT_CODE, DoneOpc );
 
-    // ¸ù¾İ²Ù×÷ÏµÍ³°æ±¾Ìî³äÏàÓ¦×¢Èë´úÂë½á¹¹Ìå
-    injectCode.PushOpc = 0x68;   // 0x68 ÊÇ push µÄ»úÆ÷Âë
+    // æ ¹æ®æ“ä½œç³»ç»Ÿç‰ˆæœ¬å¡«å……ç›¸åº”æ³¨å…¥ä»£ç ç»“æ„ä½“
+    injectCode.PushOpc = 0x68;   // 0x68 æ˜¯ push çš„æœºå™¨ç 
     injectCode.PushAdr = beginPosition + offsetof( INJECT_CODE, ModulePath );
-    injectCode.CallOpc = 0xE8;   // 0xE8 ÊÇÏà¶ÔµØÖ· call µÄ»úÆ÷Âë
+    injectCode.CallOpc = 0xE8;   // 0xE8 æ˜¯ç›¸å¯¹åœ°å€ call çš„æœºå™¨ç 
     injectCode.CallAdr = LoadLibraryAddress - endPosition;
     if ( OsVer.IsWin98 || OsVer.IsWinMe )
     {        
         injectCode.DoneOpc = 0xEB;
-        injectCode.DoneAdr = 0xFE; // 0xFEEB ÊÇÌø×ªµ½µ±Ç°ĞĞ, Ò²¾ÍÊÇÔ­µØÑ­»·
+        injectCode.DoneAdr = 0xFE; // 0xFEEB æ˜¯è·³è½¬åˆ°å½“å‰è¡Œ, ä¹Ÿå°±æ˜¯åŸåœ°å¾ªç¯
     }
     else
     {
-        injectCode.DoneOpc = 0xC2;   // 0xC2 ÊÇ·µ»Ø
-        injectCode.DoneAdr = 0x0004; // ·µ»ØÖµ
+        injectCode.DoneOpc = 0xC2;   // 0xC2 æ˜¯è¿”å›
+        injectCode.DoneAdr = 0x0004; // è¿”å›å€¼
     }
     strcpy_s( injectCode.ModulePath, MAX_PATH, modulePath );
 
-    // ÏòÄ¿±ê½ø³ÌĞ´Èë×¢Èë´úÂë
+    // å‘ç›®æ ‡è¿›ç¨‹å†™å…¥æ³¨å…¥ä»£ç 
     if ( !WriteProcessMemory( processInfo.hProcess, (VOID*)beginPosition, &injectCode, sizeof(INJECT_CODE), NULL ) )
     {
         OsApi.VirtualFreeEx( processInfo.hProcess, (VOID*)beginPosition, sizeof(INJECT_CODE), MEM_DECOMMIT );
@@ -344,12 +344,12 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
         return false;
     }
 
-    // ¸ù¾İ²Ù×÷ÏµÍ³°æ±¾ÓÃÏàÓ¦µÄ·½Ê½ÔËĞĞÒÑĞ´ÈëµÄ×¢Èë´úÂë
+    // æ ¹æ®æ“ä½œç³»ç»Ÿç‰ˆæœ¬ç”¨ç›¸åº”çš„æ–¹å¼è¿è¡Œå·²å†™å…¥çš„æ³¨å…¥ä»£ç 
     if ( OsVer.IsWin98 || OsVer.IsWinMe )
     {
-        // ¼ì²éÄ¿±ê½ø³ÌÊÇ·ñÒÑ¾­Æô¶¯²¢³õÊ¼»¯ºÃ, ÕâÀïÒÔÄ¿±ê½ø³Ì¼ÓÔØÁË Kernel32.dll Îª
-        // ÆäÆô¶¯³É¹¦µÄ±êÖ¾, ÇÒÅĞ¶ÏºóÔÙ Sleep() ¸øÆäÆô¶¯Ê±¼ä, »òĞí»¹ÓĞÆäËû¸üºÃ¸üÎÈ
-        // ½¡µÄ·½·¨
+        // æ£€æŸ¥ç›®æ ‡è¿›ç¨‹æ˜¯å¦å·²ç»å¯åŠ¨å¹¶åˆå§‹åŒ–å¥½, è¿™é‡Œä»¥ç›®æ ‡è¿›ç¨‹åŠ è½½äº† Kernel32.dll ä¸º
+        // å…¶å¯åŠ¨æˆåŠŸçš„æ ‡å¿—, ä¸”åˆ¤æ–­åå† Sleep() ç»™å…¶å¯åŠ¨æ—¶é—´, æˆ–è®¸è¿˜æœ‰å…¶ä»–æ›´å¥½æ›´ç¨³
+        // å¥çš„æ–¹æ³•
         if ( GetModuleInfo( exeName, "kernel32.dll", NULL ) == false )
         {
             OsApi.VirtualFreeEx( processInfo.hProcess, (VOID*)beginPosition, sizeof(INJECT_CODE), MEM_DECOMMIT );
@@ -361,9 +361,9 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
         Sleep( 50 );                       
         
         //
-        // Í¨¹ıĞŞ¸ÄÄ¿±ê½ø³ÌÖĞÄ³Ò»Ïß³ÌµÄÏß³Ì»·¾³µÄ·½·¨, Ê¹Ä¿±ê½ø³ÌÖ´ĞĞÎÒÃÇĞ´ÈëµÄ´úÂë
-        // ×¢Òâ: ÒÔÏÂÈÎÒ»¾ä ResumeThread() º¯Êıµ÷ÓÃÊ§°Ü, Ä¿±êÏß³Ì¶¼½«±»ÓÀ¾Ã¹ÒÆğ, ±Ø
-        //       Ôì³ÉÄ¿±ê½ø³Ì²»¿ÉÔ¤¼ÆµÄÑÏÖØ´íÎó, ½¨ÒéµÄ×ö·¨ÊÇÖØĞÂÆô¶¯Ä¿±ê½ø³Ì.
+        // é€šè¿‡ä¿®æ”¹ç›®æ ‡è¿›ç¨‹ä¸­æŸä¸€çº¿ç¨‹çš„çº¿ç¨‹ç¯å¢ƒçš„æ–¹æ³•, ä½¿ç›®æ ‡è¿›ç¨‹æ‰§è¡Œæˆ‘ä»¬å†™å…¥çš„ä»£ç 
+        // æ³¨æ„: ä»¥ä¸‹ä»»ä¸€å¥ ResumeThread() å‡½æ•°è°ƒç”¨å¤±è´¥, ç›®æ ‡çº¿ç¨‹éƒ½å°†è¢«æ°¸ä¹…æŒ‚èµ·, å¿…
+        //       é€ æˆç›®æ ‡è¿›ç¨‹ä¸å¯é¢„è®¡çš„ä¸¥é‡é”™è¯¯, å»ºè®®çš„åšæ³•æ˜¯é‡æ–°å¯åŠ¨ç›®æ ‡è¿›ç¨‹.
         //
         INT countSuspend;
         CONTEXT orgContext, runContext;
@@ -398,7 +398,7 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
         
         while ( runContext.Eip != endPosition )
         {
-            // È·±£²¢µ÷Õû¸ÃÏß³Ìµ½ÔËĞĞ×´Ì¬
+            // ç¡®ä¿å¹¶è°ƒæ•´è¯¥çº¿ç¨‹åˆ°è¿è¡ŒçŠ¶æ€
             while ( true )
             {
                 DWORD returnValue = ResumeThread( processInfo.hThread );
@@ -424,10 +424,10 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
                 }
             }
             
-            // ÈÃÏß³ÌÔËĞĞÎÒÃÇ×¢ÈëµÄ´úÂë
+            // è®©çº¿ç¨‹è¿è¡Œæˆ‘ä»¬æ³¨å…¥çš„ä»£ç 
             Sleep( 50 );
 
-            // È·±£²¢µ÷Õû¸ÃÏß³Ìµ½ÔİÍ£×´Ì¬
+            // ç¡®ä¿å¹¶è°ƒæ•´è¯¥çº¿ç¨‹åˆ°æš‚åœçŠ¶æ€
             if ( SuspendThread( processInfo.hThread ) == 0xFFFFFFFF )
             {
                 OsApi.VirtualFreeEx( processInfo.hProcess, (VOID*)beginPosition, sizeof(INJECT_CODE), MEM_DECOMMIT );
@@ -468,14 +468,14 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
         }
 
         //
-        // ²Ù×÷³É¹¦, »Ö¸´Ïß³Ìµ½³õÊ¼×´Ì¬
+        // æ“ä½œæˆåŠŸ, æ¢å¤çº¿ç¨‹åˆ°åˆå§‹çŠ¶æ€
         //
         if ( countSuspend > 0 )
             while ( countSuspend-- > 0 && ResumeThread( processInfo.hThread ) != 0xFFFFFFFF );
         else if ( countSuspend < 0 )
             while ( countSuspend++ < 0 && SuspendThread( processInfo.hThread ) != 0xFFFFFFFF );
     }
-    else // Windows NT, Windows2000, WindowsXP ²ÉÓÃ´´½¨Ô¶³ÌÏß³ÌµÄ·½·¨ÔËĞĞ×¢Èë´úÂë
+    else // Windows NT, Windows2000, WindowsXP é‡‡ç”¨åˆ›å»ºè¿œç¨‹çº¿ç¨‹çš„æ–¹æ³•è¿è¡Œæ³¨å…¥ä»£ç 
     {
         HANDLE remoteThread = CreateRemoteThread( processInfo.hProcess, NULL, 0,
             (LPTHREAD_START_ROUTINE)beginPosition, NULL, 0, NULL );
@@ -511,14 +511,14 @@ bool Injector::InjectModule( const char *exeName, const char *modulePath )
 HANDLE WINAPI OpenThread9x( DWORD dwDesiredAccess, BOOL bInheritHandle, DWORD dwThreadId )
 {
     //
-    // ËµÃ÷ : 
+    // è¯´æ˜ : 
     //
-    // 1> ÏµÍ³ API OpenProcess() ×öÁËÊ²Ã´?
-    //    1¡¢¼ì²éÄ¿±êÊÇ·ñÕæµÄÊÇÒ»¸ö½ø³Ì
-    //    2¡¢µ÷ÓÃÎ¢ÈíÎ´¹«¿ªµÄÒ»¸öÏµÍ³º¯Êı GetHandle()
+    // 1> ç³»ç»Ÿ API OpenProcess() åšäº†ä»€ä¹ˆ?
+    //    1ã€æ£€æŸ¥ç›®æ ‡æ˜¯å¦çœŸçš„æ˜¯ä¸€ä¸ªè¿›ç¨‹
+    //    2ã€è°ƒç”¨å¾®è½¯æœªå…¬å¼€çš„ä¸€ä¸ªç³»ç»Ÿå‡½æ•° GetHandle()
     //
-    // 2> ÎÒÃÇµÄ OpenThread9x() ×öÁËÊ²Ã´?
-    //    Ö±½ÓµÃµ½Ïß³ÌµÄ TDB, È»ºóµ÷ÓÃ OpenProcess() µ÷ÓÃµÄ GetHandle() µÃµ½Ïß³Ì¾ä±ú
+    // 2> æˆ‘ä»¬çš„ OpenThread9x() åšäº†ä»€ä¹ˆ?
+    //    ç›´æ¥å¾—åˆ°çº¿ç¨‹çš„ TDB, ç„¶åè°ƒç”¨ OpenProcess() è°ƒç”¨çš„ GetHandle() å¾—åˆ°çº¿ç¨‹å¥æŸ„
     //
     DWORD  processID, obsfucator, *pThreadDataBase;
     HANDLE hThread;

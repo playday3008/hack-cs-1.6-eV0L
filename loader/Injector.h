@@ -1,16 +1,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// �ļ�����
+// 文件描述
 //     Injector.h
-//     ����ע��Զ�̽�����ص�һ����, �����ռ�Ϊ Injector
-//     ֧�� Windows9x, WindowsME, WindowsNT, Windows2000, WindowsXP
+//     关于注入远程进程相关的一个库, 命名空间为 Injector
+//     支持 Windows9x, WindowsME, WindowsNT, Windows2000, WindowsXP
 //
-// ��Ȩ����
-//     Copyright (c) 2009 ����Χ All Rights Reserved.
+// 版权声明
+//     Copyright (c) 2009 刘泽围 All Rights Reserved.
 //
-// ���¼�¼
+// 更新记录
 //
-//     2009��02��08�� : ����
+//     2009年02月08日 : 创建
 //
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef INJECTOR_H
@@ -24,7 +24,7 @@
 namespace Injector
 {
     //
-    // ����ϵͳ�汾, ��װ�ɽṹ��
+    // 操作系统版本, 封装成结构体
     //
     struct OS_VER
     {
@@ -35,7 +35,7 @@ namespace Injector
 
 
     //
-    // ��ע����ص�һ�����ϵͳ API, ��װ�ɽṹ��
+    // 跟注入相关的一组操作系统 API, 封装成结构体
     //
     struct OS_API
     {
@@ -68,90 +68,90 @@ namespace Injector
     };
 
     // 
-    // ����
-    //     �õ�����ϵͳ�汾
+    // 功能
+    //     得到操作系统版本
     //  
-    // ����
+    // 参数
     //
     // osVer
-    //     �������ϵͳ�汾�ṹ�������ָ��
+    //     输出操作系统版本结构体变量的指针
     //
-    // ����ֵ
-    //     false : ʧ��
-    //     true  : �ɹ�
+    // 返回值
+    //     false : 失败
+    //     true  : 成功
     //
     bool GetOsVer( OS_VER *osVer );
 
     // 
-    // ����
-    //     ���ݲ���ϵͳ�汾, ��̬�õ���ע�������ص�һ��ӿ�ͳһ��ϵͳ API
-    //     ����ò���ϵͳ���ṩ����ĳ������, ����ɿ⸺��ģ��һ��
+    // 功能
+    //     根据操作系统版本, 动态得到跟注入进程相关的一组接口统一的系统 API
+    //     如果该操作系统不提供其中某个函数, 则会由库负责模拟一个
     //  
-    // ����
+    // 参数
     //
     // osApi
-    //     ���ϵͳ API �ṹ�������ָ��
+    //     输出系统 API 结构体变量的指针
     //
-    // ����ֵ
-    //     false : ʧ��
-    //     true  : �ɹ�
+    // 返回值
+    //     false : 失败
+    //     true  : 成功
     //
     bool GetOsApi( OS_API *osApi );
 
     // 
-    // ����
-    //     ��ȡ����Ŀ����̵��������
+    // 功能
+    //     获取操作目标进程的相关数据
     //  
-    // ����
+    // 参数
     //
     // exeName
-    //     Ŀ����̵Ŀ�ִ���ļ���(������·��)
+    //     目标进程的可执行文件名(不区分路径)
     // 
     // processInfo
-    //     ����ý��� PROCESS_INFORMATION �ṹ�������ָ��
+    //     输出该进程 PROCESS_INFORMATION 结构体变量的指针
     //
-    // ����ֵ
-    //     false : ʧ��
-    //     true  : �ɹ�
+    // 返回值
+    //     false : 失败
+    //     true  : 成功
     //
     bool GetProcessInfo( const char *exeName, PROCESS_INFORMATION *processInfo );
 
     // 
-    // ����
-    //     ��ȡĿ�������һ��ģ����������
+    // 功能
+    //     获取目标进程中一个模块的相关数据
     //  
-    // ����
+    // 参数
     //
     // exeName
-    //     Ŀ����̵Ŀ�ִ���ļ���(������·��)
+    //     目标进程的可执行文件名(不区分路径)
     //
     // moduleName
-    //     Ŀ�������һ��ģ����ļ���(������·��)
+    //     目标进程中一个模块的文件名(不区分路径)
     //
     // moduleEntry32
-    //     �����ģ�� MODULEENTRY32 �ṹ�������ָ��
+    //     输出该模块 MODULEENTRY32 结构体变量的指针
     //
-    // ����ֵ
-    //     false : ʧ��
-    //     true  : �ɹ�
+    // 返回值
+    //     false : 失败
+    //     true  : 成功
     //
     bool GetModuleInfo( const char *exeName, const char *moduleName, MODULEENTRY32 *moduleEntry32 );
 
     // 
-    // ����
-    //     ��ģ��ע�뵽Ŀ�����
+    // 功能
+    //     将模块注入到目标进程
     // 
-    // ����
+    // 参数
     //
     // exeName
-    //     Ŀ����̵Ŀ�ִ���ļ���(������·��)
+    //     目标进程的可执行文件名(不区分路径)
     // 
     // modulePath
-    //     ��ע�뵽Ŀ����̵�ģ��ľ���·���������Ŀ����̵����·��
+    //     待注入到目标进程的模块的绝对路径或相对于目标进程的相对路径
     //
-    // ����ֵ
-    //     false : ʧ��
-    //     true  : �ɹ�
+    // 返回值
+    //     false : 失败
+    //     true  : 成功
     //
     bool InjectModule( const char *exeName, const char *modulePath );
 }

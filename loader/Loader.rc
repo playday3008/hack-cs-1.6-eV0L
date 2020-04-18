@@ -1,14 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// ÎÄ¼şÃèÊö
+// æ–‡ä»¶æè¿°
 //     Loader.rc
 //
-// °æÈ¨ÉùÃ÷
-//     Copyright (c) 2009 ÁõÔóÎ§ All Rights Reserved.
+// ç‰ˆæƒå£°æ˜
+//     Copyright (c) 2009 åˆ˜æ³½å›´ All Rights Reserved.
 //
-// ¸üĞÂ¼ÇÂ¼
+// æ›´æ–°è®°å½•
 //
-//     2009Äê02ÔÂ08ÈÕ : ´´½¨
+//     2009å¹´02æœˆ08æ—¥ : åˆ›å»º
 //
 ///////////////////////////////////////////////////////////////////////////////
 #include <winuser.h>
@@ -20,7 +20,7 @@ IDB_LOADER              BITMAP  DISCARDABLE     "Loader.bmp"
 IDD_LOADER DIALOG DISCARDABLE  105, 80, 259, 218
 STYLE WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
 CAPTION "Hack by eVOL"
-FONT 10, "ËÎÌå"
+FONT 10, "å®‹ä½“"
 BEGIN
     CONTROL         "-=[eVOL]=- > All Rights Served.",
                     IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,8,203,
