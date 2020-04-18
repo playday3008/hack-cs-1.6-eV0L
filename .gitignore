@@ -348,7 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/hack/loader.exe
-/hack/hack.dll
-/hack/loader.exe.lastcodeanalysissucceeded
-/hack/hack.dll.lastcodeanalysissucceeded
+/hack/*.exe
+/hack/*.dll
+/hack/*.exe.lastcodeanalysissucceeded
+/hack/*.dll.lastcodeanalysissucceeded
