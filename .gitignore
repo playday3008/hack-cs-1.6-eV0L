@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 /hack/loader.exe
 /hack/hack.dll
+/hack/loader.exe.lastcodeanalysissucceeded
+/hack/hack.dll.lastcodeanalysissucceeded
