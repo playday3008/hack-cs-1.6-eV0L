@@ -1,4 +1,4 @@
-#include "../client.h"
+#include "../source/client.h"
 
 void QAngle::AngleVectors ( Vector* Forward, Vector* Right, Vector* Up )
 {

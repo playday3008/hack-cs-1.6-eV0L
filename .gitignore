@@ -352,3 +352,4 @@ MigrationBackup/
 /hack/*.dll
 /hack/*.exe.lastcodeanalysissucceeded
 /hack/*.dll.lastcodeanalysissucceeded
+/hack/hack.zip

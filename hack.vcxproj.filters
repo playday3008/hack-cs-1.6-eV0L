@@ -19,40 +19,40 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="autoroute.cpp">
+    <ClCompile Include="source\autoroute.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="client.cpp">
+    <ClCompile Include="source\client.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="color.cpp">
+    <ClCompile Include="source\color.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="cvar.cpp">
+    <ClCompile Include="source\cvar.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="idhook.cpp">
+    <ClCompile Include="source\idhook.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="interpreter.cpp">
+    <ClCompile Include="source\interpreter.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="source\main.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="offset.cpp">
+    <ClCompile Include="source\offset.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="opengl.cpp">
+    <ClCompile Include="source\opengl.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
+    <ClCompile Include="source\player.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="soundesp.cpp">
+    <ClCompile Include="source\soundesp.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="usermsg.cpp">
+    <ClCompile Include="source\usermsg.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
@@ -73,16 +73,16 @@
     <ClCompile Include="imgui\gl3w.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="strafe.cpp">
+    <ClCompile Include="source\strafe.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="skeleton.cpp">
+    <ClCompile Include="source\skeleton.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="console.cpp">
+    <ClCompile Include="source\console.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="menu.cpp">
+    <ClCompile Include="source\menu.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="imgui\stb_image_aug.cpp">
@@ -97,13 +97,13 @@
     <ClCompile Include="imgui\soil.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="snapshot.cpp">
+    <ClCompile Include="source\snapshot.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="aimbot.cpp">
+    <ClCompile Include="source\aimbot.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="weapons.cpp">
+    <ClCompile Include="source\weapons.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="vector\QAngle.cpp">
@@ -121,34 +121,34 @@
     <ClCompile Include="resources\stringfinder.cpp">
       <Filter>resources</Filter>
     </ClCompile>
-    <ClCompile Include="norecoil.cpp">
+    <ClCompile Include="source\norecoil.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="nospread.cpp">
+    <ClCompile Include="source\nospread.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_impl_opengl2.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="gui.cpp">
+    <ClCompile Include="source\gui.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="studio.cpp">
+    <ClCompile Include="source\studio.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="esp.cpp">
+    <ClCompile Include="source\esp.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="resources\textures.cpp">
       <Filter>resources</Filter>
     </ClCompile>
-    <ClCompile Include="chat.cpp">
+    <ClCompile Include="source\chat.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="resources\gl3winit.cpp">
       <Filter>resources</Filter>
     </ClCompile>
-    <ClCompile Include="backdrop.cpp">
+    <ClCompile Include="source\backdrop.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="bass\dll.cpp">
@@ -157,39 +157,39 @@
     <ClCompile Include="bass\dll_image.cpp">
       <Filter>bass</Filter>
     </ClCompile>
-    <ClCompile Include="bigboy.cpp">
+    <ClCompile Include="source\bigboy.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="autoroute.h">
+    <ClInclude Include="source\autoroute.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="client.h">
+    <ClInclude Include="source\client.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="cvar.h">
+    <ClInclude Include="source\cvar.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="idhook.h">
+    <ClInclude Include="source\idhook.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="interpreter.h">
+    <ClInclude Include="source\interpreter.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="offset.h">
+    <ClInclude Include="source\offset.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="opengl.h">
+    <ClInclude Include="source\opengl.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
+    <ClInclude Include="source\player.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="soundesp.h">
+    <ClInclude Include="source\soundesp.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="usermsg.h">
+    <ClInclude Include="source\usermsg.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui.h">
@@ -219,16 +219,16 @@
     <ClInclude Include="imgui\glcorearb.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="strafe.h">
+    <ClInclude Include="source\strafe.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="skeleton.h">
+    <ClInclude Include="source\skeleton.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="console.h">
+    <ClInclude Include="source\console.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="menu.h">
+    <ClInclude Include="source\menu.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="imgui\stb_image_aug.h">
@@ -249,13 +249,13 @@
     <ClInclude Include="imgui\soil.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="snapshot.h">
+    <ClInclude Include="source\snapshot.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="aimbot.h">
+    <ClInclude Include="source\aimbot.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="weapons.h">
+    <ClInclude Include="source\weapons.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="vector\QAngle.h">
@@ -279,10 +279,10 @@
     <ClInclude Include="resources\detours.h">
       <Filter>resources</Filter>
     </ClInclude>
-    <ClInclude Include="norecoil.h">
+    <ClInclude Include="source\norecoil.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="nospread.h">
+    <ClInclude Include="source\nospread.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_impl_opengl2.h">
@@ -294,25 +294,25 @@
     <ClInclude Include="imgui\glu.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="gui.h">
+    <ClInclude Include="source\gui.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="studio.h">
+    <ClInclude Include="source\studio.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="esp.h">
+    <ClInclude Include="source\esp.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="resources\textures.h">
       <Filter>resources</Filter>
     </ClInclude>
-    <ClInclude Include="chat.h">
+    <ClInclude Include="source\chat.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="resources\gl3winit.h">
       <Filter>resources</Filter>
     </ClInclude>
-    <ClInclude Include="backdrop.h">
+    <ClInclude Include="source\backdrop.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="bass\bass.h">
@@ -321,13 +321,13 @@
     <ClInclude Include="bass\dll.h">
       <Filter>bass</Filter>
     </ClInclude>
-    <ClInclude Include="bigboy.h">
+    <ClInclude Include="source\bigboy.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="resources\keydefs.h">
       <Filter>resources</Filter>
     </ClInclude>
-    <ClInclude Include="color.h">
+    <ClInclude Include="source\color.h">
       <Filter>source</Filter>
     </ClInclude>
   </ItemGroup>

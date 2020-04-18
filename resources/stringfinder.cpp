@@ -1,4 +1,4 @@
-#include "../client.h"
+#include "../source/client.h"
 
 typedef map<string, int, less<string> > MapStringInt;
 

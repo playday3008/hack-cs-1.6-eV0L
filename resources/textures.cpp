@@ -1,4 +1,4 @@
-#include "../client.h"
+#include "../source/client.h"
 
 static int gcTextures = 0;
 static char grgszTextureName[CTEXTURESMAX][CBTEXTURENAMEMAX];
