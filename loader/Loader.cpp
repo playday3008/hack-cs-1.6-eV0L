@@ -22,7 +22,12 @@ HWND loaderHwnd;
 NOTIFYICONDATA trayIcon;
 
 const char exeName[2][32] = { "cstrike.exe", "hl.exe" };
+
+#if _DEBUG// if debug use debug dll
+const char moduleName[32] = "hackd.dll";
+#else
 const char moduleName[32] = "hack.dll";
+#endif
 
 const char running[34] = "Injected successfully, running...";
 const char monitor[41] = "Waiting for the target process to run...";
