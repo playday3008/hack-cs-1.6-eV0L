@@ -1,0 +1,19 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// 文件描述
+//     Resource.h
+//
+// 版权声明
+//     Copyright (c) 2007 刘泽围 All Rights Reserved.
+//
+// 更新记录
+//
+//     2007年09月11日 : 创建
+//
+///////////////////////////////////////////////////////////////////////////////
+#define IDD_LOADER 101
+#define IDB_LOADER 102
+#define IDI_LOADER 103
+#define IDC_LOADER 104
+#define IDC_BUTTON_URL 105
+#define IDC_STATIC (-1)

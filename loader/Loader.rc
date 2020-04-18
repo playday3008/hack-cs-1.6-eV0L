@@ -1,0 +1,70 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// 文件描述
+//     Loader.rc
+//
+// 版权声明
+//     Copyright (c) 2009 刘泽围 All Rights Reserved.
+//
+// 更新记录
+//
+//     2009年02月08日 : 创建
+//
+///////////////////////////////////////////////////////////////////////////////
+#include <winuser.h>
+#include "resource.h"
+
+IDI_LOADER              ICON    DISCARDABLE     "Loader.ico"
+IDB_LOADER              BITMAP  DISCARDABLE     "Loader.bmp"
+
+IDD_LOADER DIALOG DISCARDABLE  105, 80, 259, 218
+STYLE WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "Hack by eVOL"
+FONT 10, "宋体"
+BEGIN
+    CONTROL         "-=[eVOL]=- > All Rights Served.",
+                    IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,8,203,
+                    191,8
+    LTEXT           "Credit: Liu Zewei.",
+                    IDC_STATIC,8,190,186,9
+    CONTROL         102,IDC_STATIC,"Static",SS_BITMAP,7,7,246,177
+    PUSHBUTTON      "Visit site",IDC_BUTTON_URL,202,186,50,25,BS_MULTILINE | 
+                    NOT WS_TABSTOP
+END
+
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,0,0,1
+ PRODUCTVERSION 0,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x21L
+#else
+ FILEFLAGS 0x20L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "Hack by eVOL\0"
+            VALUE "FileVersion", "0, 0, 0, 1\0"
+            VALUE "InternalName", "Hack by eVOL\0"
+            VALUE "LegalCopyright", "-=[eVOL]=- > All Rights Served.\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "Loader.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Hack by eVOL\0"
+            VALUE "ProductVersion", "0, 1, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
